@@ -43,6 +43,23 @@
   nav ul{list-style:none;display:flex;gap:22px;margin:0;padding:0;flex-wrap:wrap;}
   nav a{color:var(--ink);text-decoration:none;font-weight:600;font-size:14px;}
   nav a:hover{color:var(--green-dark);}
+
+  /* Menu-item dat de aandacht mag trekken: gemarkeerd met een pulserende stip */
+  nav a.nav-new{color:var(--green-dark);background:#eaf5f0;border:1px solid rgba(58,161,126,.45);border-radius:30px;padding:5px 13px 5px 26px;position:relative;}
+  nav a.nav-new::before{
+    content:"";position:absolute;left:11px;top:50%;margin-top:-3.5px;
+    width:7px;height:7px;border-radius:50%;background:var(--accent);
+    box-shadow:0 0 0 0 rgba(242,183,5,.75);animation:navpulse 2.4s ease-out infinite;
+  }
+  nav a.nav-new:hover{background:var(--green);color:#fff;border-color:var(--green);}
+  @keyframes navpulse{
+    0%{box-shadow:0 0 0 0 rgba(242,183,5,.7);}
+    70%{box-shadow:0 0 0 7px rgba(242,183,5,0);}
+    100%{box-shadow:0 0 0 0 rgba(242,183,5,0);}
+  }
+  @media (prefers-reduced-motion:reduce){
+    nav a.nav-new::before{animation:none;}
+  }
   .btn{display:inline-block;background:var(--green);color:#fff;text-decoration:none;padding:13px 22px;border-radius:40px;font-weight:700;font-family:'Poppins';font-size:15px;border:none;cursor:pointer;transition:.2s;text-align:center;}
   .btn:hover{background:var(--green-dark);transform:translateY(-1px);}
   .btn.big{padding:16px 30px;font-size:17px;}
@@ -65,6 +82,7 @@
   .section-head h2{font-size:clamp(26px,3.5vw,36px);margin:0 0 14px;}
   .section-head p{color:var(--muted);font-size:17px;margin:0;}
   .alt{background:var(--sand);}
+  .soft{background:linear-gradient(135deg,#eaf5f0 0%,#f7f4ec 100%);}
 
   .grid{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));}
   .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px 26px;box-shadow:0 6px 18px rgba(44,125,97,.06);}
@@ -117,6 +135,30 @@
   .choice-card ul{margin:0;padding-left:20px;color:var(--muted);font-size:15px;}
   .choice-card ul li{margin-bottom:8px;}
   .choice-note{max-width:900px;margin:26px auto 0;text-align:center;font-size:17px;color:var(--ink);font-weight:600;}
+
+  /* ---------- Stand van zaken: cijfers, updates en pers ---------- */
+  .stats{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));max-width:900px;margin:0 auto 40px;}
+  .stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 20px;text-align:center;box-shadow:0 6px 18px rgba(44,125,97,.06);}
+  .stat b{display:block;font-family:'Poppins';font-weight:800;font-size:25px;line-height:1.2;color:var(--green-dark);overflow-wrap:break-word;}
+  .stat span{display:block;color:var(--muted);font-size:14px;margin-top:6px;}
+
+  .updates{max-width:840px;margin:0 auto;}
+  .update{background:#fff;border:1px solid var(--line);border-left:4px solid var(--green);border-radius:12px;padding:18px 22px;margin-bottom:14px;}
+  .update time{display:block;font-family:'Poppins';font-weight:700;font-size:13px;letter-spacing:.5px;text-transform:uppercase;color:var(--green-dark);margin-bottom:6px;}
+  .update p{margin:0;color:var(--muted);font-size:15px;}
+  .update p + p{margin-top:8px;}
+  .presslist{list-style:none;padding:0;margin:10px 0 0;}
+  .presslist li{margin-bottom:7px;font-size:14.5px;}
+
+  /* ---------- Help verspreiden en dossier inkijken ---------- */
+  .share{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:28px;}
+  .share .btn{background:#fff;color:var(--green-dark);border:2px solid var(--green);display:inline-flex;align-items:center;justify-content:center;gap:10px;}
+  .share .btn:hover{background:var(--green);color:#fff;}
+  .share .btn svg{width:19px;height:19px;flex:none;fill:currentColor;}
+  .vraag{max-width:840px;margin:40px auto 0;background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px 28px;}
+  .vraag h3{margin:0 0 12px;font-size:19px;}
+  .vraag ol{margin:0;padding-left:22px;color:var(--muted);font-size:15px;}
+  .vraag ol li{margin-bottom:8px;}
 
   footer{background:#20342d;color:#cfe0d8;padding:44px 20px;font-size:14px;}
   footer .wrap{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));}
@@ -189,6 +231,9 @@
     nav ul{flex-wrap:nowrap;gap:18px;}
     nav ul li{flex:none;}
     nav a{font-size:13.5px;white-space:nowrap;display:block;padding:4px 0;}
+    /* Gemarkeerd menu-item houdt ook op mobiel zijn pilvorm */
+    nav a.nav-new{padding:4px 12px 4px 24px;}
+    nav a.nav-new::before{left:9px;}
 
     /* Hero compacter */
     .hero{padding:34px 18px 40px;}
@@ -232,6 +277,24 @@
     .band-cta{flex-direction:column;gap:10px;}
     .band-cta .btn{width:100%;}
     .faqlink{font-size:13.5px;}
+    /* Stand van zaken en deelknoppen op mobiel */
+    .stats{grid-template-columns:1fr 1fr;gap:12px;margin-bottom:30px;}
+    .stat{padding:16px 12px;border-radius:14px;}
+    .stat b{font-size:26px;}
+    .stat span{font-size:12.5px;}
+    /* Locatie-uitleg en kaartje op mobiel */
+    .locatie{padding:22px 20px;border-radius:14px;margin-top:26px;}
+    .locatie h2{font-size:19px;}
+    .locatie p{font-size:15px;}
+    .mapframe iframe{height:230px;}
+    .maptools .btn{width:100%;}
+    .maplightbox{padding:12px;}
+    .maplightbox .inner{height:min(88vh,760px);border-radius:14px;}
+    .update{padding:16px 18px;}
+    .update p{font-size:14.5px;}
+    .vraag{padding:22px 20px;margin-top:28px;}
+    .share{flex-direction:column;gap:10px;}
+    .share .btn{width:100%;}
     footer{padding:34px 18px;}
     footer .wrap{gap:20px;grid-template-columns:1fr;}
   }
@@ -243,6 +306,47 @@
     nav ul{gap:14px;}
     .hero h1{font-size:26px;}
   }
+  /* ---------- Locatie-uitleg met kaartje in de hero ---------- */
+  .locatie{
+    max-width:900px;margin:32px auto 0;background:#fff;border:1px solid var(--line);
+    border-radius:16px;padding:26px 28px;text-align:left;
+    box-shadow:0 6px 18px rgba(44,125,97,.06);
+  }
+  .locatie h2{margin:0 0 12px;font-size:21px;color:var(--ink);}
+  .locatie p{margin:0 0 14px;color:var(--muted);font-size:15.5px;}
+  .locatie p:last-of-type{margin-bottom:0;}
+  .locatie .bron{font-size:14px;}
+  .mapwrap{margin:20px 0 0;}
+  .mapframe{
+    position:relative;border:1px solid var(--line);border-radius:14px;overflow:hidden;
+    background:var(--sand);line-height:0;
+  }
+  .mapframe iframe{width:100%;height:300px;border:0;display:block;}
+  .maptools{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:12px;}
+  .maptools .btn{padding:10px 18px;font-size:14px;}
+  .maptools .btn.ghostgreen{background:#fff;color:var(--green-dark);border:2px solid var(--green);}
+  .maptools .btn.ghostgreen:hover{background:var(--green);color:#fff;}
+  .mapcap{color:var(--muted);font-size:13.5px;margin:10px 0 0;}
+
+  /* Vergrote kaart in een overlay */
+  .maplightbox{
+    position:fixed;inset:0;z-index:120;display:none;
+    background:rgba(32,52,45,.82);padding:24px;
+  }
+  .maplightbox.show{display:flex;align-items:center;justify-content:center;}
+  .maplightbox .inner{
+    position:relative;width:100%;max-width:1100px;height:min(82vh,780px);
+    background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.35);
+  }
+  .maplightbox .inner iframe{width:100%;height:100%;border:0;display:block;}
+  .maplightbox .sluit{
+    position:absolute;top:12px;right:12px;z-index:2;
+    background:#fff;color:var(--green-dark);border:none;border-radius:40px;
+    font-family:'Poppins';font-weight:700;font-size:14px;padding:9px 16px;cursor:pointer;
+    box-shadow:0 4px 14px rgba(0,0,0,.22);
+  }
+  .maplightbox .sluit:hover{background:var(--sand);}
+
   /* ---------- Zwevende actieknop op mobiel ---------- */
   .fab{
     display:none;position:fixed;left:14px;right:14px;bottom:14px;z-index:80;
@@ -273,11 +377,13 @@
     </a>
     <nav>
       <ul>
+        <li><a class="nav-new" href="#updates">Updates</a></li>
         <li><a href="#waarom">Waarom</a></li>
         <li><a href="#voordelen">Voordelen</a></li>
         <li><a href="#keuze">Wat komt er anders?</a></li>
         <li><a href="#actie">In 5 minuten</a></li>
         <li><a href="#tekst">Voorbeeldtekst</a></li>
+        <li><a href="#verspreiden">Help verspreiden</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#contact">Contact</a></li>
         <li><a class="gc-download" href="Infokaart%20-%20Nieuwe%20middelbare%20school%20Ranst.pdf" download data-gc-event="download-infokaart-menu" data-gc-title="Infokaart (menu)">Infokaart</a></li>
@@ -303,6 +409,99 @@
         <a class="btn big gold" href="#waarom">Ontdek waarom</a>
       </div>
       <div class="deadline">⏳ Laat je steun horen vóór <strong>19 september 2026</strong>. Wacht niet om een tijdige toevoeging aan het dossier te verzekeren!</div>
+
+      <div class="locatie">
+        <h2>Even verduidelijken: wáár komt de school precies?</h2>
+        <p>
+          Er bestaat een misverstand dat de school pal aan de <strong>grote baan</strong> zou komen, waar stoppen
+          en afzetten gevaarlijk is voor kinderen. Dat is niet het geval. De school komt
+          <strong>niet met haar toegang aan de drukke doorgaande baan</strong>, maar aan een
+          <strong>rustiger stuk ernaast</strong>, weg van het doorgaande verkeer.
+        </p>
+        <p>
+          Dat maakt een groot verschil. Aankomen, wachten en afzetten gebeurt <strong>op eigen terrein</strong>,
+          niet op de rijweg. Daardoor zijn er geen manoeuvres of stilstaande auto's op de doorgaande baan,
+          en kan de <strong>veiligheid van de leerlingen wel gegarandeerd worden</strong>. Tegelijk blijft de
+          achterliggende woonwijk maximaal ontlast, want het schoolverkeer wordt aan de rand van de wijk opgevangen.
+        </p>
+        <p>
+          Ook is er <strong>aandacht voor groen</strong>: het grootste deel van het terrein blijft onverhard,
+          het regenwater wordt gebufferd op eigen terrein en het gebied achteraan blijft onaangeroerd.
+        </p>
+
+        <div class="mapwrap">
+          <div class="mapframe">
+            <iframe
+              title="Kaart met de ligging van de site in de Kromstraat, Ranst"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=4.5353%2C51.1914%2C4.5453%2C51.1955&amp;layer=mapnik&amp;marker=51.193465%2C4.540339"></iframe>
+          </div>
+          <div class="maptools">
+            <button type="button" class="btn ghostgreen" id="mapzoom">🔍 Bekijk de kaart groter</button>
+            <a class="btn ghostgreen" href="https://www.openstreetmap.org/?mlat=51.193465&amp;mlon=4.540339#map=17/51.193465/4.540339"
+               target="_blank" rel="noopener">Openen in OpenStreetMap ↗</a>
+          </div>
+          <p class="mapcap">
+            De speld staat op het <strong>onbebouwde stuk in de Kromstraat tussen nummer 120 en nummer 122</strong>,
+            in Ranst, op de grens met Wommelgem. De bestaande woningen op nummer 120 en 122 blijven staan:
+            de school komt op het open terrein daartussen.
+            Klik op de knop hierboven om de kaart schermvullend te bekijken en verder in te zoomen.
+            Kaartgegevens © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>-bijdragers.
+          </p>
+        </div>
+
+        <p class="bron">
+          Meer achtergrond over de locatiekeuze lees je in
+          <a href="https://www.gva.be/regio/antwerpen/regio-antwerpen/ranst/mogelijke-locatie-nieuwe-lab-school-bekend-kromstraat-vlakbij-wommelgem-als-optie-onderzocht/98982386.html"
+             target="_blank" rel="noopener">dit artikel in Gazet van Antwerpen</a>.
+          Let op: de sfeerbeelden bij dat artikel horen bij een <strong>eerdere locatie</strong>. Ze tonen
+          wel goed hoeveel aandacht er naar groen gaat. Het ontwerp is daarna, mede op basis van de
+          gemaakte bezwaren, <strong>aangepast aan de huidige locatie</strong>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="updates" class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Updates: de stand van zaken</h2>
+        <p>Deze pagina ging online op 31 augustus 2026. Hieronder houden we bij wat er sindsdien gebeurde. Kom af en toe terug: we vullen dit aan zodra er nieuws is.</p>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><b>Het werkt</b><span>de acties van bezoekers hebben écht effect op het dossier</span></div>
+        <div class="stat"><b>Succesvolle</b><span>positieve meldingen bij de gemeente Ranst</span></div>
+        <div class="stat"><b>Regionale pers</b><span>drie artikels over deze steunpagina</span></div>
+        <div class="stat"><b>19 sep</b><span>laatste dag van het openbaar onderzoek</span></div>
+      </div>
+
+      <div class="updates">
+        <div class="update">
+          <time>Begin september 2026</time>
+          <p>Er werden via deze pagina al <strong>veel positieve meldingen</strong> bij de gemeente Ranst gemaakt, en er komen er nog dagelijks bij. Dat toont dat er in de streek duidelijk meer steun voor dit project bestaat dan uit eerdere berichtgeving bleek. Het onderwerp leeft ondertussen ook echt: er wordt over gesproken onder buren en aan de schoolpoort.</p>
+        </div>
+        <div class="update">
+          <time>Deze week</time>
+          <p>De website werd en wordt stevig verspreid via in de regio en bij vele buurtbewoners. Ken je mensen die de plannen nog niet kennen? Dan helpt doorsturen echt.</p>
+        </div>
+        <div class="update">
+          <time>31 augustus 2026</time>
+          <p>Deze steunpagina werd gelanceerd en kwam in de regionale pers:</p>
+          <ul class="presslist">
+            <li><a href="https://www.hln.be/ranst/na-tegenstanders-laten-ook-voorstanders-lab-school-zich-horen-sympathisanten-lanceren-website-om-bouwproject-te-steunen~ab074ab6/" target="_blank" rel="noopener">HLN: “Na tegenstanders laten ook voorstanders LAB-school zich horen”</a></li>
+            <li><a href="https://www.gva.be/regio/antwerpen/regio-antwerpen/ranst/voorstanders-lab-school-starten-nu-eigen-steunwebsite/160796901.html" target="_blank" rel="noopener">Gazet van Antwerpen: “Voorstanders LAB-school starten nu eigen steunwebsite”</a></li>
+            <li><a href="https://www.nieuwsblad.be/regio/antwerpen/regio-antwerpen/ranst/voorstanders-lab-school-starten-nu-eigen-steunwebsite/160799316.html" target="_blank" rel="noopener">Het Nieuwsblad: “Voorstanders LAB-school starten nu eigen steunwebsite”</a></li>
+          </ul>
+        </div>
+        <div class="update">
+          <time>Augustus 2026</time>
+          <p>De omgevingsaanvraag voor de school in de Kromstraat werd ingediend en het openbaar onderzoek startte. Het loopt tot <strong>19 september 2026</strong>. Tot dan kan iedereen zijn mening laten kennen.</p>
+        </div>
+      </div>
+
+      <p class="note">Deze pagina wordt aangevuld zodra er nieuws is over het dossier. Kom dus af en toe eens terugkijken, dan blijf je op de hoogte.</p>
     </div>
   </section>
 
@@ -487,6 +686,63 @@ Met vriendelijke groet,
   </section>
 
 
+  <section id="verspreiden" class="soft">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Deed je al een melding? Dan kan je nu dit doen</h2>
+        <p>
+          Je positieve melding is gemaakt, bedankt daarvoor. Er is nog één ding dat een groot verschil maakt,
+          en het kost je een minuut: <strong>zorg dat meer mensen in de streek weten dat dit dossier loopt</strong>.
+          We merken dat het echt werkt: het grootste deel van de steun tot nu toe komt van mensen
+          die het via iemand anders hoorden.
+        </p>
+      </div>
+
+      <div class="share">
+        <a class="btn gc-share" data-gc-event="deel-whatsapp" data-gc-title="Deel via WhatsApp" href="https://wa.me/?text=Ik%20steunde%20de%20nieuwe%20middelbare%20school%20in%20Ranst%20(Kromstraat).%20Er%20loopt%20nu%20een%20openbaar%20onderzoek%20tot%2019%20september.%20Alle%20info%20en%20hoe%20je%20zelf%20kan%20reageren%3A%20https%3A%2F%2Fwww.ranstverdientschool.be" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.97L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15c-1.5 0-2.98-.4-4.27-1.17l-.31-.18-3.12.82.83-3.04-.2-.32a8.2 8.2 0 0 1-1.26-4.35c0-4.54 3.7-8.23 8.24-8.23s8.23 3.69 8.23 8.23-3.69 8.24-8.14 8.24Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.4-.12-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06a6.7 6.7 0 0 1-1.98-1.22 7.44 7.44 0 0 1-1.37-1.71c-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.44.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.42h-.48c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.07s.89 2.4 1.02 2.56c.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.6.19 1.14.16 1.57.1.48-.07 1.48-.6 1.69-1.19.21-.58.21-1.08.15-1.19-.06-.1-.23-.17-.48-.29Z"/></svg>Deel via WhatsApp</a>
+        <a class="btn gc-share" data-gc-event="deel-email" data-gc-title="Doorsturen per e-mail" href="mailto:?subject=Nieuwe%20middelbare%20school%20in%20Ranst&amp;body=Ik%20wil%20je%20hier%20even%20op%20wijzen%3A%20er%20loopt%20een%20openbaar%20onderzoek%20over%20de%20nieuwe%20middelbare%20school%20in%20de%20Kromstraat%20in%20Ranst%2C%20tot%2019%20september.%20Op%20deze%20pagina%20staat%20alle%20info%20en%20hoe%20je%20zelf%20kan%20reageren%3A%20https%3A%2F%2Fwww.ranstverdientschool.be"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4.24-7.47 4.67a1 1 0 0 1-1.06 0L4 8.24V6.4l8 5 8-5v1.84ZM4 18v-7.4l6.41 4.01a3 3 0 0 0 3.18 0L20 10.6V18H4Z"/></svg>Doorsturen per e-mail</a>
+        <a class="btn gc-download" href="Infokaart%20-%20Nieuwe%20middelbare%20school%20Ranst.pdf" download data-gc-event="download-infokaart-verspreiden" data-gc-title="Infokaart (verspreiden)"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 15.58a1 1 0 0 0 .71-.3l4-4a1 1 0 0 0-1.42-1.41L13 12.17V4a1 1 0 0 0-2 0v8.17l-2.29-2.3a1 1 0 1 0-1.42 1.41l4 4a1 1 0 0 0 .71.3ZM19 17v2H5v-2a1 1 0 0 0-2 0v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2a1 1 0 0 0-2 0Z"/></svg>Infokaart downloaden</a>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <span class="ic">💬</span>
+          <h3>Bespreek het met wie in de streek woont</h3>
+          <p>Praat erover met familie, vrienden, buren en andere ouders. Veel mensen in Ranst, Wommelgem, Emblem, Vremde en Boechout kennen deze plannen simpelweg nog niet, of kennen ze enkel uit één artikel. Wie de plannen zelf bekijkt, kan er ook zelf een mening over vormen.</p>
+        </div>
+        <div class="card">
+          <span class="ic">📄</span>
+          <h3>Lees het dossier zelf na</h3>
+          <p>Je hoeft niemand op zijn woord te geloven, ook ons niet. De volledige aanvraag met de plannen, de studies en de nota's staat openbaar online. Wie de cijfers en tekeningen zelf naleest, merkt dat veel bezorgdheden al in het ontwerp werden opgevangen.</p>
+          <a class="faqlink" href="https://omgevingsloketinzage.omgeving.vlaanderen.be/2026069398" target="_blank" rel="noopener">Bekijk het openbare dossier →</a>
+        </div>
+        <div class="card">
+          <span class="ic">📰</span>
+          <h3>Volg de berichtgeving</h3>
+          <p>Dit dossier komt regelmatig in de regionale pers. Bij eerdere berichtgeving ging het vooral over de tegenstand, terwijl er in de streek ook veel steun blijkt te bestaan. Wie de artikels leest, ziet meteen dat er twee kanten aan dit verhaal zijn.</p>
+          <a class="faqlink" href="#updates">De artikels staan bij Updates →</a>
+        </div>
+        <div class="card">
+          <span class="ic">📬</span>
+          <h3>Geef de infokaart door</h3>
+          <p>De infokaart vat het project samen, verdeel deze zeker verder. Hij werd al veel verspreid, maar mag zeker nog verder verspreid worden!</p>
+        </div>
+      </div>
+
+      <div class="vraag">
+        <h3>Wat wij aan de betrokken besturen vragen</h3>
+        <p style="color:var(--muted);font-size:15px;margin:0 0 14px;">
+          Deze pagina is een burgerinitiatief, geen actie tégen iemand. Wat wij vragen is eenvoudig:
+        </p>
+        <ol>
+          <li>Neem de <strong>capaciteitsnood in het secundair onderwijs</strong> in deze regio ernstig: jongeren uit Ranst, Wommelgem en omgeving hebben vandaag geen middelbare school in eigen streek.</li>
+          <li>Beoordeel dit dossier op basis van de <strong>plannen en studies die in het dossier zitten</strong>, en niet op basis van het aantal reacties voor of tegen.</li>
+          <li>Blijf <strong>in gesprek met de initiatiefnemers en met de buurt</strong>. De initiatiefnemers pasten hun ontwerp meermaals aan na overleg met omwonenden, en staan open voor verdere bezorgdheden.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
   <section id="faq">
     <div class="wrap">
       <div class="section-head">
@@ -622,7 +878,7 @@ Met vriendelijke groet,
         <a class="btn big gold" href="https://eloket.ranst.be/nl/melding-of-vraag-aan-gemeente-ranst" target="_blank" rel="noopener">Maak nu je positieve melding →</a>
         <a class="btn big ghost gc-download" href="Infokaart%20-%20Nieuwe%20middelbare%20school%20Ranst.pdf" download data-gc-event="download-infokaart-actieblok" data-gc-title="Infokaart (actieblok)">Infokaart downloaden en mee verspreiden</a>
       </div>
-      <p class="band-note">Help mee bekendmaken: verspreid de infokaart door hem af te geven of door te sturen aan buren, ouders of vrienden.</p>
+      <p class="band-note">Help mee bekendmaken: verspreid de infokaart bij jouw buren, ouders of vrienden.</p>
     </div>
   </section>
 
@@ -638,6 +894,7 @@ Met vriendelijke groet,
       <h4>Handige links</h4>
       <p>
         <a href="https://www.nieuwemiddelbareschoolranst.be" target="_blank" rel="noopener">Officiële website van het project</a><br>
+        <a href="https://omgevingsloketinzage.omgeving.vlaanderen.be/2026069398" target="_blank" rel="noopener">Het openbare dossier inkijken (Omgevingsloket)</a><br>
         <a href="https://eloket.ranst.be/nl/melding-of-vraag-aan-gemeente-ranst" target="_blank" rel="noopener">Positieve melding maken (e-loket Ranst)</a>
       </p>
     </div>
@@ -652,6 +909,15 @@ Met vriendelijke groet,
     Nieuwe middelbare school in de Kromstraat, Ranst: laat je steun als voorstander horen vóór 19 september 2026, zo zijn we zeker dat jouw positieve melding wordt meegenomen in het dossier.
   </div>
 </footer>
+
+<!-- Vergrote, inzoombare kaart (wordt pas geladen bij openen) -->
+<div class="maplightbox" id="maplightbox" role="dialog" aria-modal="true" aria-label="Kaart met de ligging van de site in de Kromstraat, Ranst">
+  <div class="inner">
+    <button type="button" class="sluit" id="mapsluit">✕ Sluiten</button>
+    <iframe id="mapbig" title="Vergrote kaart met de ligging van de site in de Kromstraat, Ranst"
+            referrerpolicy="no-referrer-when-downgrade" src="about:blank"></iframe>
+  </div>
+</div>
 
 <div class="toast" id="toast">Tekst gekopieerd naar het klembord ✔</div>
 <a class="fab" id="fab" href="#actie">Steun in 5 minuten →</a>
@@ -758,6 +1024,49 @@ Met vriendelijke groet,
      We doen dit zelf (i.p.v. het automatische data-goatcounter-click) omdat dat
      in de horizontaal scrollbare menubalk op mobiel soms niet meetelt. */
   document.querySelectorAll('a.gc-download').forEach(a => {
+    a.addEventListener('click', () => {
+      if (window.goatcounter && window.goatcounter.count) {
+        window.goatcounter.count({
+          path: a.getAttribute('data-gc-event'),
+          title: a.getAttribute('data-gc-title'),
+          event: true
+        });
+      }
+    });
+  });
+
+  /* Kaartje vergroten: overlay met een inzoombare kaart.
+     De grote kaart wordt pas ingeladen bij het openen (spaart data bij het laden van de pagina). */
+  const mapLightbox = document.getElementById('maplightbox');
+  const mapZoomBtn  = document.getElementById('mapzoom');
+  const mapCloseBtn = document.getElementById('mapsluit');
+  const mapBig      = document.getElementById('mapbig');
+  const mapBigSrc   = 'https://www.openstreetmap.org/export/embed.html?bbox=4.5303%2C51.1894%2C4.5503%2C51.1975&layer=mapnik&marker=51.193465%2C4.540339';
+
+  function openMap(){
+    if (!mapLightbox) return;
+    if (mapBig.getAttribute('src') !== mapBigSrc) mapBig.setAttribute('src', mapBigSrc);
+    mapLightbox.classList.add('show');
+    document.body.style.overflow = 'hidden';
+    mapCloseBtn.focus();
+    if (window.goatcounter && window.goatcounter.count) {
+      window.goatcounter.count({ path: 'kaart-vergroot', title: 'Kaart vergroot bekeken', event: true });
+    }
+  }
+  function closeMap(){
+    if (!mapLightbox) return;
+    mapLightbox.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+  if (mapZoomBtn)  mapZoomBtn.addEventListener('click', openMap);
+  if (mapCloseBtn) mapCloseBtn.addEventListener('click', closeMap);
+  if (mapLightbox) mapLightbox.addEventListener('click', (e) => { if (e.target === mapLightbox) closeMap(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mapLightbox && mapLightbox.classList.contains('show')) closeMap();
+  });
+
+  /* Tel klikken op de deelknoppen (WhatsApp, doorsturen per e-mail) in GoatCounter. */
+  document.querySelectorAll('a.gc-share').forEach(a => {
     a.addEventListener('click', () => {
       if (window.goatcounter && window.goatcounter.count) {
         window.goatcounter.count({
